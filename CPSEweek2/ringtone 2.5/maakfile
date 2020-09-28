@@ -1,0 +1,23 @@
+gcc := g++ -std=c++17
+
+build: generator.exe
+
+clean: 
+	rm -f generator.exe *.o
+
+generator.exe: generator.o make_melody.o note_player_print.o rtttl_player.o 
+	$(gcc) make_melody.o generator.o note_player_print.o rtttl_player.o -o generator.exe
+
+generator.o: generator.cpp note.hpp note_player_print.hpp fur_elise.hpp rtttl_player.hpp
+	$(gcc) -c generator.cpp -o generator.o 
+
+make_melody.o: make_melody.cpp 
+	$(gcc) -c make_melody.cpp -o make_melody.o
+
+
+note_player_print.o: note_player_print.cpp note_player_print.hpp
+	$(gcc) -c note_player_print.cpp -o note_player_print.o 
+
+rtttl_player.o: rtttl_player.cpp rtttl_player.hpp
+	$(gcc) -c rtttl_player.cpp -o rtttl_player.o
+

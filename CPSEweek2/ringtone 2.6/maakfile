@@ -1,0 +1,19 @@
+gcc := g++ -std=c++17
+
+build: generator.exe
+
+melody.cpp: generator.exe
+	./generator.exe 	
+
+CLEAN += generator.exe *.o 
+
+generator.exe: generator.o make_melody.o 
+	$(gcc) make_melody.o generator.o  -o generator.exe
+
+generator.o: generator.cpp note.hpp 
+	$(gcc) -c generator.cpp -o generator.o 
+
+make_melody.o: make_melody.cpp 
+	$(gcc) -c make_melody.cpp -o make_melody.o
+
+
